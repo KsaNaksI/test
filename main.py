@@ -1,12 +1,16 @@
 from flask_login import LoginManager, login_manager
 from flask import Flask, render_template, redirect
-from sqlalchemy import db_session
+import sqlalchemy
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField
 from wtforms.validators import DataRequired
 from user import User
-app = Flask(__name__)
+import sqlalchemy as sa
+import sqlalchemy.orm as orm
+from sqlalchemy.orm import Session
 
+app = Flask(__name__)
+SqlAlchemyBase = orm.declarative_base()
 
 @app.route("/")
 def index():

@@ -1,5 +1,6 @@
 import sqlalchemy
-
+import sqlalchemy.orm as orm
+SqlAlchemyBase = orm.declarative_base()
 
 class User(SqlAlchemyBase):
     __tablename__ = 'users'
