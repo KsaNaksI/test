@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block code %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-primary text-white">Регистрация</div>
+          <div class="card-body">
+            <form method="POST" action="/register">
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Введите email" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Введите пароль" required>
+              </div>
+              <div class="form-group">
+                <label for="repeatPassword">Повторите пароль</label>
+                <input type="password" class="form-control" id="repeatPassword" name="repeat_password" placeholder="Повторите пароль" required>
+              </div>
+              <div class="form-group">
+                <label for="surname">Фамилия</label>
+                <input type="text" class="form-control" id="surname" name="surname" placeholder="Введите фамилию">
+              </div>
+              <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Введите имя">
+              </div>
+              <div class="form-group">
+                <label for="age">Возраст</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="Введите возраст">
+              </div>
+              <div class="form-group">
+                <label for="position">Должность</label>
+                <input type="text" class="form-control" id="position" name="position" placeholder="Введите должность">
+              </div>
+              <div class="form-group">
+                <label for="speciality">Специальность</label>
+                <input type="text" class="form-control" id="speciality" name="speciality" placeholder="Введите специальность">
+              </div>
+              <div class="form-group">
+                <label for="address">Адрес</label>
+                <input type="text" class="form-control" id="address" name="address" placeholder="Введите адрес">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Зарегистрироваться</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock %}

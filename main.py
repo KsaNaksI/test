@@ -1,42 +1,40 @@
-from flask_login import LoginManager, login_manager
-from flask import Flask, render_template, redirect
-import sqlalchemy
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, EmailField
-from wtforms.validators import DataRequired
-from user import User
-import sqlalchemy as sa
-import sqlalchemy.orm as orm
-from sqlalchemy.orm import Session
+from flask import Flask, request, render_template, redirect
+
+from data import db_session
+from data.users import User
 
 app = Flask(__name__)
-SqlAlchemyBase = orm.declarative_base()
 
-@app.route("/")
-def index():
-    return 0
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        db_session.global_init("db/blogs.db")
+        db_sess = db_session.create_session()
+        email = request.form['email']
+        password = request.form['password']
+        surname = request.form['surname']
+        name = request.form['name']
+        age = request.form['age']
+        position = request.form['position']
+        speciality = request.form['speciality']
+        address = request.form['address']
+        user = User()
+        user.surname = surname
+        user.name = name
+        user.age = age
+        user.position = position
+        user.speciality = speciality
+        user.address = address
+        user.email = email
+        db_sess.add(user)
 
-class LoginForm(FlaskForm):
-    email = EmailField('Почта', validators=[DataRequired()])
-    password = PasswordField('Пароль', validators=[DataRequired()])
-    remember_me = BooleanField('Запомнить меня')
-    submit = SubmitField('Войти')
+        db_sess.commit()
 
-@login_manager.user_loader
-def load_user(user_id):
-    db_sess = db_session.create_session()
-    return db_sess.query(User).get(user_id)
+        # После обработки данных можно выполнить любые другие действия, например, запись в базу данных
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        return redirect('/success')
-    return render_template('login.html', title='Авторизация', form=form)
-
-
-login_manager = LoginManager()
-login_manager.init_app(app)
+        # После обработки данных можно перенаправить пользователя на другую страницу
+        return "Вы зарегестрированы"
+    return render_template('reg.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

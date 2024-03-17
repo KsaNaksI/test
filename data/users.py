@@ -1,6 +1,7 @@
 import sqlalchemy
-import sqlalchemy.orm as orm
-SqlAlchemyBase = orm.declarative_base()
+
+from data.db_session import SqlAlchemyBase
+
 
 class User(SqlAlchemyBase):
     __tablename__ = 'users'
@@ -12,5 +13,3 @@ class User(SqlAlchemyBase):
     speciality = sqlalchemy.Column(sqlalchemy.String)
     address = sqlalchemy.Column(sqlalchemy.String)
     email = sqlalchemy.Column(sqlalchemy.String, unique=True)
-    hashed_password = sqlalchemy.Column(sqlalchemy.String)
-    modified_date = sqlalchemy.Column(sqlalchemy.DateTime)
